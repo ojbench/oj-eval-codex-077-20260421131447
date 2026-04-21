@@ -51,8 +51,8 @@ namespace sjtu {
         }
 
         bool IsSame(const CrossArray & o){
-            // Same primary storage arrays indicate same space
-            return this->lines_ptrs == o.lines_ptrs;
+            // Belong to the same memory space if they are the same object
+            return this == &o;
         }
 
         bool InsertArrays(const int * Input, int size){
@@ -60,7 +60,7 @@ namespace sjtu {
             int idx = current_lines;
             if (size < 0) size = 0;
             if (size == 0) {
-                lines_ptrs[idx] = new int[0];
+                lines_ptrs[idx] = nullptr;
                 line_sizes[idx] = 0;
             } else {
                 int *arr = new int[size];
@@ -123,4 +123,3 @@ namespace sjtu {
 
     };
 }
-
